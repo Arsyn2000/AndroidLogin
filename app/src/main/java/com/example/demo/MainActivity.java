@@ -3,16 +3,19 @@ package com.example.demo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     EditText username, password;
     Button btn1;
+    Background bg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +24,9 @@ public class MainActivity extends AppCompatActivity {
         btn1 = findViewById(R.id.activity_main_loginButton);
         username = findViewById(R.id.activity_main_usernameEditText);
         password = findViewById(R.id.activity_main_passwordEditText);
-        System.out.println(username);
-        System.out.println(password);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)  {
-                System.out.println("Button Clicked");
                 openNewActivity();
             }
         });
@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openNewActivity(){
-        String userName = username.getText().toString();
+        String user = username.getText().toString();
         String pass = password.getText().toString();
-        System.out.println(userName);
-        System.out.println(pass);
+        bg = new Background(getApplicationContext());
+        bg.execute(user, pass);
         Intent intent;
-        if(userName.equals("admin") && pass.equals("admin")){
+        if(user.equals("admin") && pass.equals("admin")){
             intent = new Intent(this, SecondActivity.class);
         }else{
             Toast.makeText(getBaseContext(), "Wrong credentials. Try again.", Toast.LENGTH_SHORT).show();
