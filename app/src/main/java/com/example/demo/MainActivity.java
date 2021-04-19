@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.out.println("Hey");
         btn1 = findViewById(R.id.activity_main_loginButton);
         username = findViewById(R.id.activity_main_usernameEditText);
         password = findViewById(R.id.activity_main_passwordEditText);
